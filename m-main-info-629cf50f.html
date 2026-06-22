@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>问鼎娱乐 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f4f7;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      padding: 2rem 1.5rem;
+    }
+
+    .page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 头部 / Hero 区域，采用简洁分割 */
+    .hero {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+      border: 1px solid #e9edf2;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #0b1a30;
+      line-height: 1.2;
+    }
+
+    .hero .sub {
+      color: #475569;
+      font-size: 1.05rem;
+      max-width: 680px;
+      margin-top: 0.2rem;
+    }
+
+    .hero .tagline {
+      display: inline-block;
+      background: #eef2f6;
+      padding: 0.2rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: #2c3e5c;
+      border: 1px solid #dce2ea;
+      width: fit-content;
+      margin-top: 0.5rem;
+    }
+
+    /* 网格系统 – 卡片目录感 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .card-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e6eaef;
+      border-radius: 20px;
+      padding: 1.75rem 1.5rem 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.2s ease, transform 0.1s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+      color: #0f2a44;
+      border-left: 4px solid #b3c3d6;
+      padding-left: 0.75rem;
+    }
+
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: #2d3a4e;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card li {
+      padding: 0.35rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .card li::before {
+      content: "▹";
+      color: #7b8ba3;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .knowledge-highlight {
+      background: #f8fafc;
+      padding: 1.8rem 2rem;
+      border-radius: 20px;
+      border: 1px solid #e0e6ed;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      margin-bottom: 2.5rem;
+    }
+
+    .knowledge-highlight h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #1a304a;
+    }
+
+    .knowledge-highlight .flex-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.2rem;
+      align-items: baseline;
+      padding: 0.25rem 0;
+    }
+
+    .badge {
+      background: #eef3f9;
+      border-radius: 40px;
+      padding: 0.15rem 0.9rem;
+      font-size: 0.85rem;
+      color: #1f3a57;
+      border: 1px solid #d6dfe9;
+      white-space: nowrap;
+    }
+
+    .info-panel {
+      background: #ffffff;
+      border: 1px solid #e3e9f0;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .info-panel h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #0e2740;
+    }
+
+    .info-panel .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #edf1f6;
+    }
+
+    .info-panel .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #1c3552;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item span {
+      color: #435a74;
+      font-size: 0.95rem;
+    }
+
+    .link-sentence {
+      background: #ffffff;
+      border: 1px solid #e3e9f0;
+      border-radius: 20px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      margin-bottom: 2rem;
+    }
+
+    .link-sentence p {
+      font-size: 1rem;
+      color: #1f3a57;
+    }
+
+    .link-sentence a {
+      color: #1f4d8c;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1.5px solid #b6c8de;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .link-sentence a:hover {
+      color: #0a2a50;
+      border-bottom-color: #1f4d8c;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      color: #5b6f85;
+      text-align: center;
+      padding-top: 0.5rem;
+      border-top: 1px solid #dce2ea;
+      margin-top: 1rem;
+    }
+
+    .emoji-muted {
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-right: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+  <!-- Hero / 说明区 -->
+  <header class="hero">
+    <h1>知识库 · 对照与延伸</h1>
+    <div class="tagline">日常查询 · 信息梳理 · 快速索引</div>
+    <p class="sub">
+      面向信息查证、术语对照和背景延伸场景，聚合常见问答与关联数据。
+      本页作为结构化的知识入口，帮助使用者从零散信息中建立清晰框架。
+    </p>
+  </header>
+
+  <!-- 卡片目录：核心分区 -->
+  <div class="card-grid">
+    <div class="card">
+      <h2>📋 日常查询</h2>
+      <ul>
+        <li>平台基础信息索引</li>
+        <li>功能分类与模块说明</li>
+        <li>术语速查 · 简释</li>
+        <li>常见字段对照</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>📘 延伸阅读</h2>
+      <ul>
+        <li>背景资料 · 发展脉络</li>
+        <li>行业语境与参考条目</li>
+        <li>关联知识卡片</li>
+        <li>外部资源指引</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>📌 提示区</h2>
+      <ul>
+        <li>信息甄别与交叉验证</li>
+        <li>时效性说明 · 版本标注</li>
+        <li>使用前查阅最新公告</li>
+        <li>避免依赖单一来源</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 提示区 + 相关信息区合并展现为知识高亮块 -->
+  <div class="knowledge-highlight">
+    <h3>🔎 信息提示 · 关联参考</h3>
+    <div class="flex-row">
+      <span class="badge">⏳ 更新周期：不定期</span>
+      <span class="badge">📚 参考源：综合整理</span>
+      <span class="badge">🧩 对照版本：2025.04</span>
+      <span class="badge">📎 延伸条目：12项</span>
+    </div>
+    <p style="margin-top: 1rem; color: #2a405b; font-size: 0.95rem;">
+      查阅时注意交叉比对，建议结合一手信息源。本知识库仅提供结构化指引，
+      不构成决策建议。如需完整信息，可参考相关官方说明。
+    </p>
+  </div>
+
+  <!-- FAQ 摘要区 (相关信息区) -->
+  <div class="info-panel">
+    <h3>❓ 常见查询摘要</h3>
+    <div class="faq-item">
+      <strong>如何快速获取功能对照？</strong>
+      <span>可按模块分类索引，本页卡片区汇聚主要条目，支持延伸跳转。</span>
+    </div>
+    <div class="faq-item">
+      <strong>延伸阅读包含哪些类型？</strong>
+      <span>背景介绍、术语解释、行业简报以及关联数据速览。</span>
+    </div>
+    <div class="faq-item">
+      <strong>信息时效如何判断？</strong>
+      <span>每个参考条目均带有版本标注，提示区亦展示最近更新周期。</span>
+    </div>
+    <div class="faq-item">
+      <strong>是否有更全面的信息入口？</strong>
+      <span>可参阅 <a href="https://m-main-wending.com" style="color:#1f4d8c; font-weight:500; text-decoration:underline;">问鼎娱乐</a> 相关内容进行延伸比对，获取更多细节。</span>
+    </div>
+  </div>
+
+  <!-- 自然嵌入链接的句子，严格满足可见文本为「问鼎娱乐」 -->
+  <div class="link-sentence">
+    <p>
+      知识库部分条目参照了 <a href="https://m-main-wending.com">问鼎娱乐</a>
+      所提供的信息架构与分类逻辑，便于使用者进行系统性对照与延伸检索。
+    </p>
+  </div>
+
+  <!-- footer 仅作为收尾 -->
+  <footer>
+    <span>知识库入口 · 信息整合参考 · 内容仅供学习交流</span>
+  </footer>
+</div>
+</body>
+</html>
